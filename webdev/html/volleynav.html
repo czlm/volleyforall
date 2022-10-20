@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+  <script src="../javascripts/volleynav.js"></script>
+  <link rel="stylesheet" href="../stylesheets/volleynav.css">
+  <link rel="stylesheet" href="../stylesheets/navbar.css">
+  <title>VolleyForAll - VolleyNav</title>
+</head>
+<body onload="updateLogin()">
+  <div style="background-color:#474350;">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="index.html" class="navbar-brand"><img src="../media/logo.png" class="branding"/>VolleyForAll</a>
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#toggleMobileMenu"
+        aria-controls="toggleMobileMenu"
+        aria-expanded="false"
+        aria-lable="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="toggleMobileMenu">
+        <ul class="navbar-nav text-center">
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Favourite Players
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="player1.html">Yuki Ishikawa</a>
+          <a class="dropdown-item" href="player2.html">Jenia Grebennikov</a>
+          <a class="dropdown-item" href="player3.html">Micah Christenson</a>
+        </div>
+      </li>
+          <li class="nav-item">
+            <a href="volleynav.html" class="nav-link">VolleyNav</a>
+          </li>
+          <li class="nav-item" id="loginStuff">
+             <a href ="#" id="navText"><button class="btn btn-primary nav-link" id="login" name="button" onclick="openModal()" style="background-color:#E77728; border:0;">Login</button></a>
+          </li>
+          <li class="nav-item">
+            <a href="userprofile.html"><span class="navbar-text nav-bar-right" id="navText"></span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+<div class="loginModal" id="myModal">
+  <div class="modal-content">
+    <span class="closeBtn" id="closeBtn" onclick="closeModal()" style="float:right; font-size:30px;">&times;</span>
+    <form name="login" id="loginForm" onsubmit="loginPage()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" name ="user" class="form-control" id="username" placeholder="Enter username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" aria-describedby="passwdHelp"placeholder="Password" required>
+        <small id="passwdHelp" class="form-text text-muted"></small>
+      </div>
+      <a href="#" onclick="newAcc()" style="margin-bottom:10px;">New to VolleyforAll? Create a new account here! <br></a>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <form name="signUpForm" style="display:none;" id="signUpForm" onsubmit="signUp()">
+      <div class="form-group">
+        <label for="new-username">Username:</label>
+        <input type="text" name ="user" class="form-control" id="new-username" placeholder="Enter username" required>
+      </div>
+      <div class="form-group">
+        <label for="new-password">Password:</label>
+        <input type="password" class="form-control" id="new-password" placeholder="Password" required>
+        <small id="passwdHelp" class="form-text text-muted"></small>
+      </div>
+      <div class="form-group">
+        <label for="cfm-password">Confirm Password:</label>
+        <input type="password" class="form-control" id="cfmPassword" placeholder="Confirm Password" required>
+      </div>
+      <a href="#" onclick="back()" style="margin-bottom:10px;">Back <br></a>
+      <button type="submit" class="btn btn-primary" >Sign Up</button>
+    </form>
+  </div>
+</div>
+<table></table>
+  <div id="map"></div>
+  <script>
+  function initMap() {
+    const singapore = { lat: 1.364917, lng: 103.82287 };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center:singapore,
+    });
+    const image = {
+      url:"../media/volleyball-ball.png",
+      scaledSize: new google.maps.Size(50,50),
+    }
+
+    // woodlands whales markers
+    const contentString1 =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h1 id="firstHeading" class="firstHeading">Woodlands Whales</h1>' +
+    '<div id="bodyContent">' +
+    "<p><b>Woodlands Whales</b>, who started as a small group of friends who like volleyball, has progressed to being one of the best teams in Singapore.Through their strong and persistent play style, they have won games against teams like Bishan Beavers, who are known to have very strong players.</p>"
+    +"<p>Woodlands Whales are now recruting, sign up using the form below:</p>"+
+    '<p><a href="signupform.html">' +
+    "Here</a>"+"</p>"
+    "</div>" +
+    "</div>";
+    const infowindow1 = new google.maps.InfoWindow({
+      content: contentString1,
+    });
+    const marker1 = new google.maps.Marker({
+      position:{lat: 1.436897, lng:103.786216},
+      map,
+      title: "Woodlands Whales",
+      icon: image,
+    });
+    marker1.addListener("click", () => {
+      infowindow1.open({
+        anchor: marker1,
+        map,
+        shouldFocus: false,
+      });
+    });
+    // Bishan Beavers
+    const contentString2 =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h1 id="firstHeading" class="firstHeading">Bishan Beavers</h1>' +
+    '<div id="bodyContent">' +
+    "<p><b>Bishan Beavers</b>, who was founded by an ex national team player, has lived up to the reputation of the famous player, Ryan Tan. The players are skilled and physically gifted, letting the Bishan Beavers dominate the Singapore Volleyball field.</p>"+
+    "<p>Bishan Beavers are now recruiting, sign up using the form below:</p>"+
+    '<p><a href="signupform.html">' +
+    "Here</a>"+"</p>"+
+    "</div>" +
+    "</div>";
+    const infowindow2 = new google.maps.InfoWindow({
+      content: contentString2,
+    });
+    const marker2 = new google.maps.Marker({
+      position:{lat: 1.350986, lng:103.848255},
+      map,
+      title: "Bishan Beavers",
+      icon:image
+    });
+    marker2.addListener("click", () => {
+      infowindow2.open({
+        anchor: marker2,
+        map,
+        shouldFocus: false,
+      });
+    });
+    // Tampines Tigers
+    const contentString3 =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h1 id="firstHeading" class="firstHeading">Tampines Tigers</h1>' +
+    '<div id="bodyContent">' +
+    "<p><b>Tampines Tigers</b> was founded by a family of volleyball loving players, it was a sport that brought the neighbourhood together with players of all ages. Although the Tampines Tigers might not be as good as the other teams, their teamwork is second to none.</p>"+
+    "<p>Tampines Tigers are now recruiting, sign up using the form below:</p>"+
+    '<p><a href="signupform.html">' +
+    "Here</a>"+"</p>"+
+    "</div>" +
+    "</div>";
+    const infowindow3 = new google.maps.InfoWindow({
+      content: contentString3,
+    });
+    const marker3 = new google.maps.Marker({
+      position:{lat: 1.354653, lng:103.943571},
+      map,
+      title: "Bishan Beavers",
+      icon:image
+    });
+    marker3.addListener("click", () => {
+      infowindow3.open({
+        anchor: marker3,
+        map,
+        shouldFocus: false,
+      });
+    });
+    // Jurong Jumpers
+    const contentString4 =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h1 id="firstHeading" class="firstHeading">Jurong Jumpers</h1>' +
+    '<div id="bodyContent">' +
+    "<p><b>Jurong Jumpers</b> is an icon for alot of volleyball players in Singapores because of their unique playstyle. Being a former parkour group, they had amazing jumping ability and flexibility. As a result watching the Jurong Jumpers play is always a new experience.</p>"+
+    "<p>Jurong Jumpers are now recruiting, sign up using the form below:</p>"+
+    '<p><a href="signupform.html">' +
+    "Here</a>"+"</p>"+
+    "</div>" +
+    "</div>";
+    const infowindow4 = new google.maps.InfoWindow({
+      content: contentString4,
+    });
+    const marker4 = new google.maps.Marker({
+      position:{lat: 1.33417, lng:103.72278},
+      map,
+      title: "Bishan Beavers",
+      icon:image
+    });
+    marker4.addListener("click", () => {
+      infowindow4.open({
+        anchor: marker4,
+        map,
+        shouldFocus: false,
+      });
+    });
+    // Tampines Hub
+    const contentString5 =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h3 id="firstHeading" class="firstHeading">Tampines Hub</h3>' +
+    '<div id="bodyContent">' +
+    "<p><b>Tampines Hub</b> A good place to play Volleyball.</p>"+
+    "</div>" +
+    "</div>";
+    const infowindow5 = new google.maps.InfoWindow({
+      content: contentString5,
+    });
+    const marker5 = new google.maps.Marker({
+      position:{lat: 1.353108, lng:103.940361},
+      map,
+      title: "Tampnines Hub",
+    });
+    marker5.addListener("click", () => {
+      infowindow5.open({
+        anchor: marker5,
+        map,
+        shouldFocus: false,
+      });
+    });
+    // OCBC stadium
+    const contentString6 =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h3 id="firstHeading" class="firstHeading">OCBC Stadium</h3>' +
+    '<div id="bodyContent">' +
+    "<p><b>OCBC Stadium</b> a good place to play volleyball </p>"+
+    "</div>" +
+    "</div>";
+    const infowindow6 = new google.maps.InfoWindow({
+      content: contentString6,
+    });
+    const marker6 = new google.maps.Marker({
+      position:{lat: 1.304503, lng:103.876061},
+      map,
+      title: "Tampnines Hub",
+    });
+    marker6.addListener("click", () => {
+      infowindow6.open({
+        anchor: marker6,
+        map,
+        shouldFocus: false,
+      });
+    });
+
+  }
+
+  window.initMap = initMap;
+</script>
+<div class="container-fluid text-center footer">
+  <p class="h6">This webpage was made to introduce players to Volleyball and share my love for it.</p>
+  <p class="attr"><a href="https://www.flaticon.com/free-icons/sports-and-competition" title="sports and competition icons">Sports and competition icons created by Ina Mella - Flaticon</a></p>
+  <p class="h6" style="margin-bottom:0px;">Copyright &copy; Matthew Chew</p>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDScVaI2MgzsdUX01OIdpABGTChcjGuYAY&callback=initMap"
+async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</body>
+</html>

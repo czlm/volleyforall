@@ -1,0 +1,114 @@
+@media (min-width:544px){
+  h1 {
+    font-size:1.5rem;
+  }
+
+}
+@media (min-width:768px){
+  h1 {
+    font-size:2rem;
+  }
+
+}
+@media (min-width:992px){
+  h1 {
+    font-size:2.5rem;
+  }
+
+}
+@media (min-width:1200px){
+  h1 {
+    font-size:3rem;
+  }
+}
+html,body {
+  margin:0px;
+  padding:0px;
+  overflow-x:hidden;
+  width:100%;
+  height:100%;
+}
+.masthead{
+  background-size: cover;
+  background-position: center center;
+  min-height:100vh;
+  position:relative fixed;
+  color:white;
+  text-shadow: 2px 2px 2px rgba(0,0,0,.2);
+}
+.overlay {
+  background-size: cover;
+  min-height:100vh;
+  position:relative fixed;
+  color:white;
+  text-shadow: 2px 2px 2px rgba(0,0,0,.2);
+  background-color: rgba(0, 0, 0, 0.6)
+}
+.intro{
+  margin-top:100px;
+}
+
+.background{
+  background:rgba(255, 0, 0, 0.5);
+}
+
+button {
+  width:40%;
+  padding-top:5%;
+}
+ul li {
+  display:inline-block;
+}
+hr{
+  position: relative;
+  bottom:16px;
+  border: none;
+  height: 10px;
+  background: red;
+  margin-bottom: 50px;
+}
+.modal {
+  display:none;
+  z-index: 1;
+  position:fixed;
+  bottom:0;
+}
+.modal-content{
+  width:100%;
+  position:fixed;
+  bottom:0;
+}
+div > a {
+  margin:7% 7%;
+}
+.logos > img {
+  max-height:50px;
+}
+
+.closeBtn{
+  color:#ccc;
+  float:right;
+}
+.attr{
+  font-size:70%;
+}
+.attr a {
+  text-decoration:none;
+
+}
+.card > img {
+  max-height:30%;
+  max-width:30%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:10%;
+}
+.card-title {
+  color:black;
+}
+.card-text {
+  color:black;
+}
+.card {
+  height:90%;
+}
